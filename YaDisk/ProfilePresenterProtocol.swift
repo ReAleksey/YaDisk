@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+// Протокол для взаимодействия Presenter и Model
+protocol ProfilePresenterProtocol {
+    func getDiskInfo()
+}

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol LastFiles: AnyObject {
+protocol Files: AnyObject {
     func download()
     func openfile()
 }

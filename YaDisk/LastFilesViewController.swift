@@ -1,8 +1,15 @@
 //
-//  FilesViewController.swift
+//  LastFilesViewController.swift
 //  YaDisk
 //
 //  Created by Алексей Решетников on 15.03.2024.
 //
 
-import Foundation
+import UIKit
+
+class LastFilesViewController: UIViewController {
+    
+
+    
+    
+}

@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol DiskModelProtocol {
+    func getDiskInfo(completion: @escaping (DiskInfo?, Error?) -> Void)
+}

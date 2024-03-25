@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+protocol Profile: AnyObject {
+    func showInfo (_ diskInfo: DiskInfo)
+    func showLoading()
+    func hideLoading()
+    func showError(_ error: Error)
+}
