@@ -19,3 +19,25 @@ struct SystemFolders: Decodable {
     let downloads: String
 }
 
+struct Resource: Decodable {
+    let name: String
+    let type: String
+    let created: String
+    let modified: String
+    let path: String
+    let size: Int?
+    let mime_type: String?
+    let preview: String?
+}
+
+struct ResourceList: Decodable {
+    let items: [Resource]?
+    
+    let sort: String?
+    let public_key: String?
+    let limit: String?
+    let offset: String?
+    let path: String?
+    let total: String?
+}
+

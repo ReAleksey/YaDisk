@@ -84,9 +84,13 @@ struct DiagramView: View {
                     indexOfTappedSlice = indexOfTappedSlice == index ? -1 : index
                 }
                 .font(indexOfTappedSlice == index ? .headline : .subheadline)
+                .fixedSize(horizontal: true, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .trailing)
             RoundedRectangle(cornerRadius: 3)
                 .fill(chartDataObj.chartData[index].color)
                 .frame(width: 20, height: 20)
         }
+        .padding(.vertical, 15) // Добавляем небольшой вертикальный отступ для выравнивания
+        .frame(maxWidth: .infinity, alignment: .bottom) // Выравниваем блок по ширине
     }
 }
