@@ -7,10 +7,11 @@
 
 import UIKit
 import SwiftUI
+import SnapKit
 
 class ProfileViewController: UIViewController, Profile {
     private var diskInfoNew: DiskInfo?
-    private var presenter: ProfilePresenter?
+    private var presenter: Presenter?
 
     func showInfo(_ diskInfo: DiskInfo) {
         diskInfoNew = diskInfo
@@ -22,7 +23,6 @@ class ProfileViewController: UIViewController, Profile {
         
         // Используем UIHostingController для отображения SwiftUI внутри UIViewController
         let hostingController = UIHostingController(rootView: DiagramView(chartDataObj: DiagramContainer(), diskInfo: diskInfoNew ?? DiskInfo(trash_size: 0, total_space: 0, used_space: 0, system_folders: SystemFolders(applications: "", downloads: ""))))
-        print ("Переданные в хостинг контроллер данные:", hostingController.rootView.diskInfo.total_space)
         addChild(hostingController)
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(hostingController.view)
@@ -64,16 +64,54 @@ class ProfileViewController: UIViewController, Profile {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = ProfilePresenter(view: self)
+        presenter = Presenter(view: self)
         view.backgroundColor = .white
         presenter?.getDiskInfo()
+        setupViews()
     }
     
     private func setupViews() {
+        guard let navigationBar = navigationController?.navigationBar else { return }
 
+        let titleView = UIView()
+        navigationBar.addSubview(titleView)
+
+        let titleLabel = UILabel()
+        titleLabel.text = "Профиль"
+        titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        titleView.addSubview(titleLabel)
+
+        let exitButton = UIButton(type: .system)
+        exitButton.setImage(UIImage(systemName: "xmark")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        exitButton.addTarget(self, action: #selector(exitButtonTapped), for: .touchUpInside)
+        navigationBar.addSubview(exitButton)
+
+        titleView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.height.equalToSuperview()
+        }
+
+        titleLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+
+        exitButton.snp.makeConstraints { make in
+            make.centerY.equalTo(titleLabel.snp.centerY)
+            make.right.equalToSuperview().inset(25)
+            make.height.width.equalTo(44)
+        }
     }
-    
-    private func setupConstrains() {
-        
-    }
+
+    @objc private func exitButtonTapped() {
+           let alert = UIAlertController(title: nil, message: "Вы уверены, что хотите выйти?", preferredStyle: .alert)
+           alert.addAction(UIAlertAction(title: "Да", style: .destructive, handler: { _ in
+               self.handleExitConfirmation()
+           }))
+           alert.addAction(UIAlertAction(title: "Нет", style: .cancel, handler: nil))
+           
+           present(alert, animated: true, completion: nil)
+       }
+    private func handleExitConfirmation() {
+           print("Пользователь подтвердил выход.")
+       }
 }

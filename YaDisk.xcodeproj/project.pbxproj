@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B135B802BBD7F4000A33AE3 /* ElementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B135B7F2BBD7F4000A33AE3 /* ElementCell.swift */; };
+		5B135B892BC01EED00A33AE3 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5B135B872BC01EED00A33AE3 /* Model.xcdatamodeld */; };
 		5B4B697E2B7F779D00FA4CE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4B697D2B7F779D00FA4CE9 /* AppDelegate.swift */; };
 		5B4B69802B7F779D00FA4CE9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4B697F2B7F779D00FA4CE9 /* SceneDelegate.swift */; };
 		5B4B69822B7F779D00FA4CE9 /* DiskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4B69812B7F779D00FA4CE9 /* DiskModel.swift */; };
@@ -18,14 +20,21 @@
 		5B6AA7622BA44D11004AE90D /* ProfileProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AA7612BA44D11004AE90D /* ProfileProtocol.swift */; };
 		5B6AA7642BA44D1E004AE90D /* FilesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AA7632BA44D1E004AE90D /* FilesProtocol.swift */; };
 		5B6AA7682BA47127004AE90D /* ProfilePresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AA7672BA47127004AE90D /* ProfilePresenterProtocol.swift */; };
-		5B6AA76A2BA47136004AE90D /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AA7692BA47136004AE90D /* ProfilePresenter.swift */; };
+		5B6AA76A2BA47136004AE90D /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AA7692BA47136004AE90D /* Presenter.swift */; };
 		5B6AA76C2BA9B5E8004AE90D /* Diagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AA76B2BA9B5E8004AE90D /* Diagram.swift */; };
+		5BA0BACD2BD2A78200E4D7A2 /* TestAPIVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0BACC2BD2A78200E4D7A2 /* TestAPIVC.swift */; };
+		5BA0BAF52BD2D54E00E4D7A2 /* FilesCell+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0BAF32BD2D54E00E4D7A2 /* FilesCell+CoreDataClass.swift */; };
+		5BA0BAF62BD2D54E00E4D7A2 /* FilesCell+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0BAF42BD2D54E00E4D7A2 /* FilesCell+CoreDataProperties.swift */; };
+		5BA0BAF82BD2D56A00E4D7A2 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0BAF72BD2D56A00E4D7A2 /* CoreDataManager.swift */; };
 		5BF346EF2B9F313200DC3F44 /* JSONManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF346EE2B9F313200DC3F44 /* JSONManager.swift */; };
 		5BF346F12B9F3D2800DC3F44 /* DiskModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF346F02B9F3D2800DC3F44 /* DiskModelProtocol.swift */; };
 		5BF346F32BA43F1100DC3F44 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF346F22BA43F1100DC3F44 /* TabBarController.swift */; };
 		5BF346F52BA43FA700DC3F44 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF346F42BA43FA700DC3F44 /* ProfileViewController.swift */; };
 		5BF346F72BA43FD500DC3F44 /* LastFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF346F62BA43FD500DC3F44 /* LastFilesViewController.swift */; };
 		5BF346F92BA4400100DC3F44 /* AllFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF346F82BA4400100DC3F44 /* AllFilesViewController.swift */; };
+		74D9643B9B54A736FBAE1380 /* Pods_YaDisk_YaDiskUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C8E2EE7F9DAA31EC6956E66 /* Pods_YaDisk_YaDiskUITests.framework */; };
+		8FB15FB660FB157F12DB44FE /* Pods_YaDiskTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 899C14E3A3FB2305DAA42D1E /* Pods_YaDiskTests.framework */; };
+		9DEAF26CE4D6D76F5233581D /* Pods_YaDisk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68097659AB79E38615C6052E /* Pods_YaDisk.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +55,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1AC4595B22FC69F529A1FC9F /* Pods-YaDisk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaDisk.debug.xcconfig"; path = "Target Support Files/Pods-YaDisk/Pods-YaDisk.debug.xcconfig"; sourceTree = "<group>"; };
+		1C8E2EE7F9DAA31EC6956E66 /* Pods_YaDisk_YaDiskUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YaDisk_YaDiskUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EC178D75CEE3C725449A382 /* Pods-YaDisk-YaDiskUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaDisk-YaDiskUITests.release.xcconfig"; path = "Target Support Files/Pods-YaDisk-YaDiskUITests/Pods-YaDisk-YaDiskUITests.release.xcconfig"; sourceTree = "<group>"; };
+		50878D0472B76AD39FCBAD74 /* Pods-YaDisk-YaDiskUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaDisk-YaDiskUITests.debug.xcconfig"; path = "Target Support Files/Pods-YaDisk-YaDiskUITests/Pods-YaDisk-YaDiskUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		5B135B7F2BBD7F4000A33AE3 /* ElementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementCell.swift; sourceTree = "<group>"; };
+		5B135B882BC01EED00A33AE3 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5B4B697A2B7F779D00FA4CE9 /* YaDisk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YaDisk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B4B697D2B7F779D00FA4CE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5B4B697F2B7F779D00FA4CE9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,14 +76,23 @@
 		5B6AA7612BA44D11004AE90D /* ProfileProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProtocol.swift; sourceTree = "<group>"; };
 		5B6AA7632BA44D1E004AE90D /* FilesProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesProtocol.swift; sourceTree = "<group>"; };
 		5B6AA7672BA47127004AE90D /* ProfilePresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenterProtocol.swift; sourceTree = "<group>"; };
-		5B6AA7692BA47136004AE90D /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
+		5B6AA7692BA47136004AE90D /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		5B6AA76B2BA9B5E8004AE90D /* Diagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diagram.swift; sourceTree = "<group>"; };
+		5BA0BACC2BD2A78200E4D7A2 /* TestAPIVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAPIVC.swift; sourceTree = "<group>"; };
+		5BA0BAF32BD2D54E00E4D7A2 /* FilesCell+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilesCell+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5BA0BAF42BD2D54E00E4D7A2 /* FilesCell+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilesCell+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5BA0BAF72BD2D56A00E4D7A2 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5BF346EE2B9F313200DC3F44 /* JSONManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONManager.swift; sourceTree = "<group>"; };
 		5BF346F02B9F3D2800DC3F44 /* DiskModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskModelProtocol.swift; sourceTree = "<group>"; };
 		5BF346F22BA43F1100DC3F44 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		5BF346F42BA43FA700DC3F44 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5BF346F62BA43FD500DC3F44 /* LastFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastFilesViewController.swift; sourceTree = "<group>"; };
 		5BF346F82BA4400100DC3F44 /* AllFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFilesViewController.swift; sourceTree = "<group>"; };
+		68097659AB79E38615C6052E /* Pods_YaDisk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YaDisk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		705B332F39E0D17784B9D711 /* Pods-YaDiskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaDiskTests.release.xcconfig"; path = "Target Support Files/Pods-YaDiskTests/Pods-YaDiskTests.release.xcconfig"; sourceTree = "<group>"; };
+		899C14E3A3FB2305DAA42D1E /* Pods_YaDiskTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YaDiskTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C1FF73E5557D35C96988931 /* Pods-YaDisk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaDisk.release.xcconfig"; path = "Target Support Files/Pods-YaDisk/Pods-YaDisk.release.xcconfig"; sourceTree = "<group>"; };
+		AFE12E44ECF68A1D9C31CDA8 /* Pods-YaDiskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YaDiskTests.debug.xcconfig"; path = "Target Support Files/Pods-YaDiskTests/Pods-YaDiskTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DEAF26CE4D6D76F5233581D /* Pods_YaDisk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FB15FB660FB157F12DB44FE /* Pods_YaDiskTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,19 +116,48 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74D9643B9B54A736FBAE1380 /* Pods_YaDisk_YaDiskUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3039C2FDCFDAE12F6198A52A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				68097659AB79E38615C6052E /* Pods_YaDisk.framework */,
+				1C8E2EE7F9DAA31EC6956E66 /* Pods_YaDisk_YaDiskUITests.framework */,
+				899C14E3A3FB2305DAA42D1E /* Pods_YaDiskTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		341A92C2D0250266CCC4681A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1AC4595B22FC69F529A1FC9F /* Pods-YaDisk.debug.xcconfig */,
+				9C1FF73E5557D35C96988931 /* Pods-YaDisk.release.xcconfig */,
+				50878D0472B76AD39FCBAD74 /* Pods-YaDisk-YaDiskUITests.debug.xcconfig */,
+				3EC178D75CEE3C725449A382 /* Pods-YaDisk-YaDiskUITests.release.xcconfig */,
+				AFE12E44ECF68A1D9C31CDA8 /* Pods-YaDiskTests.debug.xcconfig */,
+				705B332F39E0D17784B9D711 /* Pods-YaDiskTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		5B4B69712B7F779D00FA4CE9 = {
 			isa = PBXGroup;
 			children = (
+				5BA0BAF72BD2D56A00E4D7A2 /* CoreDataManager.swift */,
+				5BA0BAF32BD2D54E00E4D7A2 /* FilesCell+CoreDataClass.swift */,
+				5BA0BAF42BD2D54E00E4D7A2 /* FilesCell+CoreDataProperties.swift */,
 				5B4B697C2B7F779D00FA4CE9 /* YaDisk */,
 				5B4B69932B7F77A000FA4CE9 /* YaDiskTests */,
 				5B4B699D2B7F77A000FA4CE9 /* YaDiskUITests */,
 				5B4B697B2B7F779D00FA4CE9 /* Products */,
+				341A92C2D0250266CCC4681A /* Pods */,
+				3039C2FDCFDAE12F6198A52A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -124,18 +179,21 @@
 				5BF346F02B9F3D2800DC3F44 /* DiskModelProtocol.swift */,
 				5B4B69812B7F779D00FA4CE9 /* DiskModel.swift */,
 				5B6AA7672BA47127004AE90D /* ProfilePresenterProtocol.swift */,
-				5B6AA7692BA47136004AE90D /* ProfilePresenter.swift */,
+				5B6AA7692BA47136004AE90D /* Presenter.swift */,
 				5B6AA7612BA44D11004AE90D /* ProfileProtocol.swift */,
 				5BF346F42BA43FA700DC3F44 /* ProfileViewController.swift */,
 				5B6AA7632BA44D1E004AE90D /* FilesProtocol.swift */,
+				5BA0BACC2BD2A78200E4D7A2 /* TestAPIVC.swift */,
 				5BF346F62BA43FD500DC3F44 /* LastFilesViewController.swift */,
 				5BF346F82BA4400100DC3F44 /* AllFilesViewController.swift */,
 				5BF346F22BA43F1100DC3F44 /* TabBarController.swift */,
 				5BF346EE2B9F313200DC3F44 /* JSONManager.swift */,
+				5B135B7F2BBD7F4000A33AE3 /* ElementCell.swift */,
 				5B6AA76B2BA9B5E8004AE90D /* Diagram.swift */,
 				5B4B69862B7F77A000FA4CE9 /* Assets.xcassets */,
 				5B4B69882B7F77A000FA4CE9 /* LaunchScreen.storyboard */,
 				5B4B698B2B7F77A000FA4CE9 /* Info.plist */,
+				5B135B872BC01EED00A33AE3 /* Model.xcdatamodeld */,
 			);
 			path = YaDisk;
 			sourceTree = "<group>";
@@ -164,9 +222,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5B4B69A42B7F77A000FA4CE9 /* Build configuration list for PBXNativeTarget "YaDisk" */;
 			buildPhases = (
+				40E433B6B6CA6EEF56E8BA7A /* [CP] Check Pods Manifest.lock */,
 				5B4B69762B7F779D00FA4CE9 /* Sources */,
 				5B4B69772B7F779D00FA4CE9 /* Frameworks */,
 				5B4B69782B7F779D00FA4CE9 /* Resources */,
+				BAA4304A465DA6C6097D4D2E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -181,6 +241,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5B4B69A72B7F77A000FA4CE9 /* Build configuration list for PBXNativeTarget "YaDiskTests" */;
 			buildPhases = (
+				7DC82EBDF444AFDD112BE8F0 /* [CP] Check Pods Manifest.lock */,
 				5B4B698C2B7F77A000FA4CE9 /* Sources */,
 				5B4B698D2B7F77A000FA4CE9 /* Frameworks */,
 				5B4B698E2B7F77A000FA4CE9 /* Resources */,
@@ -199,9 +260,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5B4B69AA2B7F77A000FA4CE9 /* Build configuration list for PBXNativeTarget "YaDiskUITests" */;
 			buildPhases = (
+				45213B58A050D8E78C639118 /* [CP] Check Pods Manifest.lock */,
 				5B4B69962B7F77A000FA4CE9 /* Sources */,
 				5B4B69972B7F77A000FA4CE9 /* Frameworks */,
 				5B4B69982B7F77A000FA4CE9 /* Resources */,
+				EC07EF3E566F3A7C60EA1D29 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -282,6 +345,109 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		40E433B6B6CA6EEF56E8BA7A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YaDisk-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		45213B58A050D8E78C639118 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YaDisk-YaDiskUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7DC82EBDF444AFDD112BE8F0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YaDiskTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BAA4304A465DA6C6097D4D2E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YaDisk/Pods-YaDisk-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YaDisk/Pods-YaDisk-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YaDisk/Pods-YaDisk-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EC07EF3E566F3A7C60EA1D29 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YaDisk-YaDiskUITests/Pods-YaDisk-YaDiskUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YaDisk-YaDiskUITests/Pods-YaDisk-YaDiskUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YaDisk-YaDiskUITests/Pods-YaDisk-YaDiskUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5B4B69762B7F779D00FA4CE9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -291,8 +457,10 @@
 				5BF346F92BA4400100DC3F44 /* AllFilesViewController.swift in Sources */,
 				5BF346F32BA43F1100DC3F44 /* TabBarController.swift in Sources */,
 				5BF346F12B9F3D2800DC3F44 /* DiskModelProtocol.swift in Sources */,
+				5BA0BACD2BD2A78200E4D7A2 /* TestAPIVC.swift in Sources */,
 				5B6AA7682BA47127004AE90D /* ProfilePresenterProtocol.swift in Sources */,
 				5BF346EF2B9F313200DC3F44 /* JSONManager.swift in Sources */,
+				5B135B802BBD7F4000A33AE3 /* ElementCell.swift in Sources */,
 				5BF346F52BA43FA700DC3F44 /* ProfileViewController.swift in Sources */,
 				5B4B697E2B7F779D00FA4CE9 /* AppDelegate.swift in Sources */,
 				5BF346F72BA43FD500DC3F44 /* LastFilesViewController.swift in Sources */,
@@ -300,7 +468,11 @@
 				5B4B69802B7F779D00FA4CE9 /* SceneDelegate.swift in Sources */,
 				5B6AA7642BA44D1E004AE90D /* FilesProtocol.swift in Sources */,
 				5B6AA7622BA44D11004AE90D /* ProfileProtocol.swift in Sources */,
-				5B6AA76A2BA47136004AE90D /* ProfilePresenter.swift in Sources */,
+				5B135B892BC01EED00A33AE3 /* Model.xcdatamodeld in Sources */,
+				5BA0BAF52BD2D54E00E4D7A2 /* FilesCell+CoreDataClass.swift in Sources */,
+				5BA0BAF62BD2D54E00E4D7A2 /* FilesCell+CoreDataProperties.swift in Sources */,
+				5BA0BAF82BD2D56A00E4D7A2 /* CoreDataManager.swift in Sources */,
+				5B6AA76A2BA47136004AE90D /* Presenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +641,7 @@
 		};
 		5B4B69A52B7F77A000FA4CE9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AC4595B22FC69F529A1FC9F /* Pods-YaDisk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -496,6 +669,7 @@
 		};
 		5B4B69A62B7F77A000FA4CE9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C1FF73E5557D35C96988931 /* Pods-YaDisk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -523,6 +697,7 @@
 		};
 		5B4B69A82B7F77A000FA4CE9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFE12E44ECF68A1D9C31CDA8 /* Pods-YaDiskTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -543,6 +718,7 @@
 		};
 		5B4B69A92B7F77A000FA4CE9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 705B332F39E0D17784B9D711 /* Pods-YaDiskTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -563,6 +739,7 @@
 		};
 		5B4B69AB2B7F77A000FA4CE9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50878D0472B76AD39FCBAD74 /* Pods-YaDisk-YaDiskUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -581,6 +758,7 @@
 		};
 		5B4B69AC2B7F77A000FA4CE9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EC178D75CEE3C725449A382 /* Pods-YaDisk-YaDiskUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -637,6 +815,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5B135B872BC01EED00A33AE3 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5B135B882BC01EED00A33AE3 /* Model.xcdatamodel */,
+			);
+			currentVersion = 5B135B882BC01EED00A33AE3 /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = /Users/aleksey/Documents/Xcode/diplom_iOS_lvl1/ydisk_skillbox/YaDisk/YaDisk/Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5B4B69722B7F779D00FA4CE9 /* Project object */;
 }

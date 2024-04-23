@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class LastFilesViewController: UITableViewController {
 
@@ -15,7 +16,7 @@ class LastFilesViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.register(ElementCell.self, forCellReuseIdentifier: ElementCell.identifier)
 
         fetchData()
     }
@@ -31,17 +32,37 @@ class LastFilesViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ElementCell.identifier, for: indexPath) as? ElementCell else {
+            fatalError("You are a loser")
+        }
+        
+        let element: Resource = resources[indexPath.row]
+        cell.name.text = element.name
+        diskModel.loadImage(adress: element.preview ?? "https://w7.pngwing.com/pngs/619/624/png-transparent-sad-pepe-feelsbadman-memes-pepe-the-frog.png") { image in
+            if let loadedImage = image {
+                // Используйте загруженное изображение
+                cell.miniImage.image = loadedImage
+                print("Image loaded successfully!")
+            } else {
+                print("Failed to load image.")
+            }
+        }
+            
+//        let previewURL = URL(string: element.preview ?? "https://w7.pngwing.com/pngs/619/624/png-transparent-sad-pepe-feelsbadman-memes-pepe-the-frog.png")!
+//        
+//        AF.download(previewURL).responseData { response in
+//            if response.error == nil {
+//                cell.miniImage.image = UIImage(data: response.value ?? Data())
+//            }
+//        }
 
-        let resource = resources[indexPath.row]
-        cell.textLabel?.text = resource.name
         return cell
     }
 
     // MARK: - Data fetching
 
     func fetchData() {
-        diskModel.fetchData(forPath: "") { [weak self] resources, error in
+        diskModel.fetchData(forPath: "resources/last-uploaded") { [weak self] resources, error in
             guard let self = self else { return }
 
             if let error = error {
@@ -50,7 +71,7 @@ class LastFilesViewController: UITableViewController {
             }
 
             DispatchQueue.main.async {
-                self.resources = resources ?? []
+//                self.resources = resources ?? []
                 self.tableView.reloadData()
             }
         }

@@ -8,9 +8,9 @@
 import Foundation
 
 struct DiskInfo: Decodable {
-    let trash_size: Float
-    let total_space: Float
-    let used_space: Float
+    let trash_size: Double
+    let total_space: Double
+    let used_space: Double
     let system_folders: SystemFolders
 }
 
@@ -28,16 +28,18 @@ struct Resource: Decodable {
     let size: Int?
     let mime_type: String?
     let preview: String?
+    let public_key: String?
+    let public_url: String?
+    let _embedded: String?
+    let custom_properties: String?
 }
 
 struct ResourceList: Decodable {
     let items: [Resource]?
-    
     let sort: String?
     let public_key: String?
-    let limit: String?
-    let offset: String?
+    let limit: Int?
+    let offset: Int?
     let path: String?
     let total: String?
 }
-

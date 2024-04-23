@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ProfilePresenter: ProfilePresenterProtocol {
+class Presenter: ProfilePresenterProtocol {
     
     weak var view: Profile?
     var model: DiskModelProtocol
@@ -16,6 +16,7 @@ class ProfilePresenter: ProfilePresenterProtocol {
         self.view = view
         self.model = DiskModel()
     }
+    
     func getDiskInfo() {
         view?.showLoading()
 
@@ -29,10 +30,11 @@ class ProfilePresenter: ProfilePresenterProtocol {
                     self.view?.showError(error)
                 } else if let diskInfo = diskInfo {
                     self.view?.showInfo(diskInfo)
-                    
                 }
             }
         }
     }
+    
+    
 }
 

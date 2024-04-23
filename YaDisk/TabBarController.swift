@@ -10,9 +10,9 @@ import UIKit
 class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        let firstVC = ProfileViewController()
-        let secondVC = LastFilesViewController()
-        let thirdVC = AllFilesViewController()
+        let firstVC = UINavigationController(rootViewController: ProfileViewController())
+        let secondVC = TestAPIVC()// LastFilesViewController()
+        let thirdVC = UINavigationController(rootViewController: AllFilesViewController())
         
         self.setViewControllers([firstVC, secondVC, thirdVC], animated: true)
         self.tabBar.backgroundColor = .white

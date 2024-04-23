@@ -8,7 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct CirclePart {
+struct CirclePart: Identifiable {
+    let id = UUID()
     let color: Color
     var storage: CGFloat
     var percent: CGFloat
@@ -20,19 +21,13 @@ class DiagramContainer: ObservableObject {
         CirclePart(color: Color(#colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)), storage: 0.0, percent: 0.0),
     ]
     
-    func updateChartData(totalSpace: Float, usedSpace: Float) {
+    func updateChartData(totalSpace: Double, usedSpace: Double) {
         
         chartData[0].storage = CGFloat(usedSpace)
         chartData[1].storage = CGFloat(totalSpace)
         
         chartData[0].percent = CGFloat((usedSpace/(usedSpace+totalSpace))*100)
         chartData[1].percent = CGFloat((totalSpace/(usedSpace+totalSpace))*100)
-        
-        for index in 0..<chartData.count {
-            print ("index", index)
-            print ("from", index == 0 ? 0.0 : chartData[index - 1].percent / 100)
-            print ("to", chartData[index].percent / 100)
-        }
     }
 }
 
@@ -57,40 +52,75 @@ struct DiagramView: View {
     
     private var circleView: some View {
         ZStack {
-            ForEach(0..<chartDataObj.chartData.count) { index in
-              
+            ForEach(chartDataObj.chartData) { part in
                 Circle()
-                    .trim(from: index == 0 ? 0.0 : chartDataObj.chartData[index - 1].percent / 100,
-                          to: index == 0 ? chartDataObj.chartData[index].percent / 100 : (chartDataObj.chartData[index].percent+chartDataObj.chartData[index - 1].percent)/100)
-                    .stroke(chartDataObj.chartData[index].color, lineWidth: 100)
-                    .scaleEffect(index == indexOfTappedSlice ? 1.1 : 1.0)
-                    .animation(.spring, value: 1)
+                    .trim(from: calculateStartPercent(part: part),
+                          to: calculateEndPercent(part: part))
+                    .stroke(part.color, lineWidth: 40)
+                    .scaleEffect(isTapped(part: part) ? 1.05 : 1.0)
+                    .animation(.spring(), value: indexOfTappedSlice)
+            }
+            Text(totalMemoryText)
+                .font(.largeTitle)
+                .foregroundColor(.black)
+        }
+        .frame(width: 230, height: 230)
+    }
+    
+    
+    private func calculateStartPercent(part: CirclePart) -> CGFloat {
+        guard let index = chartDataObj.chartData.firstIndex(where: {$0.id == part.id}) else { return 0 }
+        return index == 0 ? 0.0 : chartDataObj.chartData[index - 1].percent / 100
+    }
+    
+    private func calculateEndPercent(part: CirclePart) -> CGFloat {
+        guard let index = chartDataObj.chartData.firstIndex(where: {$0.id == part.id}) else { return 0 }
+        return index == 0 ? part.percent / 100 : (part.percent + chartDataObj.chartData[index - 1].percent) / 100
+    }
+
+    private var totalMemoryText: String {
+        let totalMemory = (diskInfo.total_space + diskInfo.used_space) / 8 / 1024 / 1024 / 1024
+        return String(format: "%.2f ГБ", totalMemory)
+    }
+    
+    private var listView: some View {
+        VStack {
+            ForEach(chartDataObj.chartData) { part in
+                chartRowView(part: part)
             }
         }
     }
 
-    private var listView: some View {
-        return VStack {
-            ForEach(0..<chartDataObj.chartData.count) { index in
-                chartRowView(index: index)
-            }
-        }
-    }
-    
-    private func chartRowView(index: Int) -> some View {
+    private func chartRowView(part: CirclePart) -> some View {
         HStack {
-            Text(String(format: "%.2f", Double(chartDataObj.chartData[index].storage)) + " ГБ")
+            let storageText = String(format: "%.2f", Double(part.storage)) + " ГБ"
+            let statusText = partStatusText(part: part)
+            let completeText = storageText + statusText
+            
+            Text(completeText)
                 .onTapGesture {
-                    indexOfTappedSlice = indexOfTappedSlice == index ? -1 : index
+                    indexOfTappedSlice = (indexOfTappedSlice == chartDataObj.chartData.firstIndex(where: {$0.id == part.id}) ? -1 : chartDataObj.chartData.firstIndex(where: {$0.id == part.id}) ?? -1)
                 }
-                .font(indexOfTappedSlice == index ? .headline : .subheadline)
+                .font(isTapped(part: part) ? .headline : .subheadline)
                 .fixedSize(horizontal: true, vertical: true)
                 .frame(maxWidth: .infinity, alignment: .trailing)
             RoundedRectangle(cornerRadius: 3)
-                .fill(chartDataObj.chartData[index].color)
+                .fill(part.color)
                 .frame(width: 20, height: 20)
         }
-        .padding(.vertical, 15) // Добавляем небольшой вертикальный отступ для выравнивания
-        .frame(maxWidth: .infinity, alignment: .bottom) // Выравниваем блок по ширине
+        .padding(.vertical, 15)
+        .frame(maxWidth: .infinity, alignment: .bottom)
+    }
+    
+    private func partStatusText(part: CirclePart) -> String {
+        if let index = chartDataObj.chartData.firstIndex(where: {$0.id == part.id}) {
+            return index == 0 ? " - занято" : " - свободно"
+        }
+        return ""
+    }
+    
+    private func isTapped(part: CirclePart) -> Bool {
+        guard let index = chartDataObj.chartData.firstIndex(where: {$0.id == part.id}) else { return false }
+        return index == indexOfTappedSlice
     }
 }
