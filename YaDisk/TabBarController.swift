@@ -11,7 +11,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let firstVC = UINavigationController(rootViewController: ProfileViewController())
-        let secondVC = TestAPIVC()// LastFilesViewController()
+        let secondVC = AuthViewController() //TestAPIVC()// LastFilesViewController()
         let thirdVC = UINavigationController(rootViewController: AllFilesViewController())
         
         self.setViewControllers([firstVC, secondVC, thirdVC], animated: true)

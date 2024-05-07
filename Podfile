@@ -8,6 +8,7 @@ target 'YaDisk' do
   # Pods for YaDisk
 pod 'SnapKit'
 pod 'Alamofire'
+pod 'AlamofireImage'
 
   target 'YaDiskTests' do
     inherit! :search_paths

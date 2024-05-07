@@ -19,27 +19,76 @@ struct SystemFolders: Decodable {
     let downloads: String
 }
 
-struct Resource: Decodable {
-    let name: String
-    let type: String
-    let created: String
-    let modified: String
-    let path: String
-    let size: Int?
-    let mime_type: String?
-    let preview: String?
-    let public_key: String?
-    let public_url: String?
-    let _embedded: String?
-    let custom_properties: String?
+// Основная структура ответа
+struct ApiResponse: Decodable {
+    let items: [Item]
 }
 
-struct ResourceList: Decodable {
-    let items: [Resource]?
-    let sort: String?
-    let public_key: String?
-    let limit: Int?
-    let offset: Int?
-    let path: String?
-    let total: String?
+// Структура для каждого элемента в массиве "items"
+struct Item: Decodable {
+    let antivirusStatus: String
+    let size: Int
+    let commentIds: CommentIDs
+    let name: String
+    let exif: ExifData?
+    let created: String
+    let resourceID: String
+    let modified: String
+    let mimeType: String
+    let sizes: [ImageSize]?
+    let file: String
+    let preview: String?
+    let path: String
+    let sha256: String
+    let type: String
+    let md5: String
+    let revision: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case antivirusStatus = "antivirus_status"
+        case size
+        case commentIds = "comment_ids"
+        case name
+        case exif
+        case created
+        case resourceID = "resource_id"
+        case modified
+        case mimeType = "mime_type"
+        case sizes
+        case file
+        case preview
+        case path
+        case sha256
+        case type
+        case md5
+        case revision
+    }
 }
+
+// Структура для "comment_ids"
+struct CommentIDs: Decodable {
+    let privateResource: String
+    let publicResource: String
+    
+    enum CodingKeys: String, CodingKey {
+        case privateResource = "private_resource"
+        case publicResource = "public_resource"
+    }
+}
+
+// Структура для "exif"
+struct ExifData: Decodable {
+    let dateTime: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case dateTime = "date_time"
+    }
+}
+
+// Структура для массива "sizes"
+struct ImageSize: Decodable {
+    let url: String
+    let name: String
+}
+
+

@@ -9,15 +9,13 @@ import Foundation
 import UIKit
 import SnapKit
 import Alamofire
+import AlamofireImage
 
 class ElementCell: UITableViewCell {
     static let identifier = "ElementCell"
 
-    lazy var miniImage: UIImageView = {
-        let iv = UIImageView()
-        iv.image = UIImage(systemName: "photo.on.rectangle.angled")
-        return iv
-    }()
+    var miniImage =  UIImageView()
+    
     lazy var name: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 12)
@@ -51,6 +49,64 @@ class ElementCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure(with item: Item) {
+        name.text = item.name
+        size.text = formatFileSize(item.size)
+        dateLabel.text = formatDateString(item.created)
+        
+        // Загрузка изображения с авторизацией
+        if let originalSize = item.preview,
+           let url = URL(string: originalSize) {
+//            let headers: HTTPHeaders = [
+//                "Authorization": "y0_AgAAAAAkCDffAAuG_gAAAAEAIT3BAADR8oAHnTZF4aBhf7m57hD2wqFbPQ"
+//            ]
+            miniImage.af.setImage(
+                withURL: url,
+                placeholderImage: UIImage(systemName: "photo.on.rectangle.angled"),
+                filter: nil,
+                progress: nil,
+                progressQueue: DispatchQueue.main,
+                imageTransition: .crossDissolve(0.2),
+                runImageTransitionIfCached: false,
+                completion: { response in
+                    switch response.result {
+                    case .success(let image):
+                        self.miniImage.image = image
+                    case .failure(let error):
+                        if let response = response.response, response.statusCode == 403 {
+                            self.miniImage.image = UIImage(systemName: "photo.on.rectangle.angled")
+                            print("ты лох",error)
+                        } else {
+                            // Обрабатываем другие ошибки, если необходимо
+                            print(error)
+                        }
+                    }
+                }
+            )
+        } else {
+            miniImage.image = UIImage(systemName: "photo.on.rectangle.angled")
+        }
+
+    }
+
+    private func formatFileSize(_ size: Int) -> String {
+        let formatter = ByteCountFormatter()
+        formatter.allowedUnits = [.useMB]
+        formatter.countStyle = .file
+        return formatter.string(fromByteCount: Int64(size))
+    }
+
+    private func formatDateString(_ date: String) -> String {
+        // Форматирование строки даты, если формат даты известен
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        if let dateObj = dateFormatter.date(from: date) {
+            dateFormatter.dateFormat = "yyyy-MM-dd" // Измените на нужный формат
+            return dateFormatter.string(from: dateObj)
+        }
+        return date
+    }
+
     private func setupConstrains() {
         self.contentView.addSubview(miniImage)
         self.contentView.addSubview(name)

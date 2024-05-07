@@ -66,15 +66,15 @@ class CoreDataManager {
         }
     }
     
-    func saveResource(_ resource: Resource) {
-        let newFileCell = FilesCell(context: self.context)
-        newFileCell.name = resource.name
-        newFileCell.size = Int64(resource.size ?? 0)
-//        newFileCell.created = resource.created // Здесь может потребоваться преобразование строки в дату, если created передаётся как String
-//        newFileCell.publicKey = resource.public_key // Сохранение уникального ключа
-
-        self.saveContext()
-    }
+//    func saveResource(_ resource: Resource) {
+//        let newFileCell = FilesCell(context: self.context)
+//        newFileCell.name = resource.name
+//        newFileCell.size = Int64(resource.size ?? 0)
+////        newFileCell.created = resource.created // Здесь может потребоваться преобразование строки в дату, если created передаётся как String
+////        newFileCell.publicKey = resource.public_key // Сохранение уникального ключа
+//
+//        self.saveContext()
+//    }
     
     func fileExists(name: String) -> Bool {
          let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FilesCell")

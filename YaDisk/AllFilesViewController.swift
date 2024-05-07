@@ -8,11 +8,12 @@
 import Foundation
 import UIKit
 import CoreData
+import Alamofire
 
 class AllFilesViewController: UITableViewController {
     
-    var diskModel = DiskModel()
-    var resources: [Resource] = []
+    var diskModel = DiskModel.shared
+    var response: ApiResponse?
     
     struct Constants {
         static let entity = "FilesCell"
@@ -26,148 +27,126 @@ class AllFilesViewController: UITableViewController {
     }
         
     var currentSortingType: SortingType = .name // Значение по умолчанию
-
-    lazy var fetchResultController: NSFetchedResultsController<NSFetchRequestResult> = {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.entity)
-        let sortDescriptor = NSSortDescriptor(key: Constants.sortName, ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        let fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataManager.instance.context, sectionNameKeyPath: nil, cacheName: nil)
-        return fetchedResultController
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.tableView.register(ElementCell.self, forCellReuseIdentifier: ElementCell.identifier)
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
-        if let savedSortingType = UserDefaults.standard.string(forKey: "SortingType"),
-            let sortingType = SortingType(rawValue: savedSortingType) {
-            currentSortingType = sortingType
-        }
-        updateTableSorting()
         setupViews()
-        fetchResultController.delegate = self
-        do {
-            try fetchResultController.performFetch()
-        } catch {
-            print (error)
-        }
         fetchData()
     }
     
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchResultController.sections?.count ?? 0
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchResultController.sections?[section].numberOfObjects ?? 0
+        return response?.items.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 46
     }
     
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: ElementCell.identifier, for: indexPath) as? ElementCell,
-//              let fileCell = fetchResultController.object(at: indexPath) as? FilesCell else {
-//            fatalError("Cannot dequeue ElementCell or cast NSFetchedResult object")
-//        }
-//        cell.name.text = fileCell.name
-//        cell.size.text = formatFileSize(Int(fileCell.size))
-//        return cell
-//    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ElementCell.identifier, for: indexPath) as? ElementCell,
-              let fileCell = fetchResultController.object(at: indexPath) as? FilesCell else {
-            fatalError("Cannot dequeue ElementCell or cast NSFetchedResult object")
+              let fileItem = response?.items[indexPath.row] else {
+            fatalError("Cannot dequeue ElementCell or cast to ElementCell")
         }
-        cell.name.text = fileCell.name
-        cell.size.text = formatFileSize(Int(fileCell.size))
-        cell.dateLabel.text = formatDate(from: fileCell.created) // Убедитесь, что у вас есть UILabel в вашей ячейке для этого
+        
+        cell.configure(with: fileItem)
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedElement = fetchResultController.object(at: indexPath) as! FilesCell
+      
+        guard let item = response?.items[indexPath.row] else {
+            print("Item not found.")
+            return
+        }
+        
+        // Вывод информации о выбранном файле
+        print("Name: \(item.name)")
+        print("Size: \(item.size)")
+        print("Created: \(item.created)")
+        print("Resource ID: \(item.resourceID)")
+        print("Modified: \(item.modified)")
+        print("Mime Type: \(item.mimeType)")
+        print("File URL: \(item.file)")
+        print("Preview URL: \(item.preview ?? "no preview")")
+        print("Path: \(item.path)")
+        print("SHA256: \(item.sha256)")
+        print("Type: \(item.type)")
+        print("MD5: \(item.md5)")
+        print("Revision: \(item.revision)")
+        
+        // Дополнительные поля
+        print("Antivirus Status: \(item.antivirusStatus)")
+        print("Private Resource ID: \(item.commentIds.privateResource)")
+        print("Public Resource ID: \(item.commentIds.publicResource)")
+        
+        // Вывод информации о дате из данных EXIF
+        print("EXIF Date Time: \(item.exif?.dateTime ?? "no date time")")
+        
+        // Вывод информации о доступных размерах изображения
+        item.sizes?.forEach { size in
+            print("Size Name: \(size.name), URL: \(size.url)")
+        }
+        
+        // Снимаем выделение с выбранной ячейки
         tableView.deselectRow(at: indexPath, animated: true)
-        
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let element = fetchResultController.object(at: indexPath) as! FilesCell
-            CoreDataManager.instance.context.delete(element)
-            CoreDataManager.instance.saveContext()
-        }
-    }
-    
-    func updateTableSorting() {
-        let sortDescriptor: NSSortDescriptor
-        switch currentSortingType {
-        case .name:
-            sortDescriptor = NSSortDescriptor(key: Constants.sortName, ascending: true)
-        case .size:
-            sortDescriptor = NSSortDescriptor(key: Constants.sortSize, ascending: true)
-        case .created:
-            sortDescriptor = NSSortDescriptor(key: Constants.sortDate, ascending: true)
-        }
-        
-        fetchResultController.fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        do {
-            try fetchResultController.performFetch()
-            tableView.reloadData()
-        } catch {
-            print (error)
-        }
-    }
-    
-    func updateSortingType(_ newSortingType: SortingType) {
-        currentSortingType = newSortingType
-        UserDefaults.standard.set(newSortingType.rawValue, forKey: "SortingType") // Сохранение в UserDefaults
-        updateTableSorting()
     }
     
     func fetchData() {
-        diskModel.fetchData(forPath: "resources/files") { [weak self] resources, error in 
+        diskModel.loadTokenFromStorage()
+        
+        if let token = diskModel.token {
+            // Выполнить запрос с токеном
+            print("Using token: \(token)")
+        } else {
+            showError("Токен не найден. Пожалуйста, выполните вход снова.")
+        }
+        
+        diskModel.newFetchData(forPath: "resources/files") { [weak self] resources, error in
             guard let self = self else { return }
-
+            
             if let error = error {
-                print("Error fetching data: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.showError(error.localizedDescription)
+                }
                 return
             }
             
-            resources?.forEach { resource in
-                if !CoreDataManager.instance.fileExists(name: resource.name) {
-                    CoreDataManager.instance.saveResource(resource)
-                }
-            }
-            
-            DispatchQueue.main.async {
-                do {
-                    try self.fetchResultController.performFetch()
+            if let resources = resources {
+                self.response = resources
+                DispatchQueue.main.async {
                     self.tableView.reloadData()
-                } catch {
-                    print("Fetch failed: \(error.localizedDescription)")
                 }
             }
         }
     }
     
-    
-    func formatFileSize(_ sizeInBits: Int) -> String {
-        let units = ["bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
-        var convertedSize = Double(sizeInBits)
-        var unitIndex = 0
-
-        while convertedSize >= 1024.0 && unitIndex < units.count - 1 {
-            convertedSize /= 1024.0
-            unitIndex += 1
+    func showError(_ message: String) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            guard self.isViewLoaded && (self.view.window != nil) else {
+                print("View controller is not in the window hierarchy.")
+                return
+            }
+            
+            let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
         }
-
-        return String(format: "%.2f %@", convertedSize, units[unitIndex])
+    }
+    private func displayError(_ error: Error) {
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
     }
     
     func createCustomTitleView(contactName: String) -> UIView {
@@ -176,6 +155,7 @@ class AllFilesViewController: UITableViewController {
         nameLabel.text = contactName
         nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
         view.addSubview(nameLabel)
+        
         nameLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.centerX.equalToSuperview()
@@ -209,83 +189,23 @@ class AllFilesViewController: UITableViewController {
         
     }
     
-    @objc func sortingButtonTapped() {
-        let alertController = UIAlertController(title: "Sort By", message: nil, preferredStyle: .actionSheet)
+    @objc private func sortingButtonTapped() {
         
-        let nameAction = UIAlertAction(title: "Name", style: .default) { (_) in
-            self.updateSortingType(.name)
-        }
-        let sizeAction = UIAlertAction(title: "Size", style: .default) { (_) in
-            self.updateSortingType(.size)
-        }
-//        let dateAction = UIAlertAction(title: "Date", style: .default) { (_) in
-//            self.updateSortingType(.created)
-//        }
-        
-        alertController.addAction(nameAction)
-        alertController.addAction(sizeAction)
-//        alertController.addAction(dateAction)
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        present(alertController, animated: true, completion: nil)
     }
-    
-    func formatDate(from date: Date?) -> String {
-        guard let date = date else { return "Дата неизвестна" }
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy" // Или любой другой формат, который вам нужен
-        return formatter.string(from: date)
+        
+    func loadImage(urlString: String, completion: @escaping (UIImage?) -> Void) {
+        guard let url = URL(string: urlString) else {
+            completion(nil)
+            return
+        }
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(nil)
+                return
+            }
+            completion(UIImage(data: data))
+        }
+        task.resume()
     }
 
-
-}
-
-extension AllFilesViewController: NSFetchedResultsControllerDelegate {
-    // Информирует о начале изменения данных
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            if let indexPath = newIndexPath {
-                tableView.insertRows(at: [indexPath], with: .automatic)
-            }
-        case .update:
-            if let indexPath = indexPath {
-                let element = fetchResultController.object(at: indexPath) as! FilesCell
-                let cell = tableView.cellForRow(at: indexPath) as! ElementCell
-                
-                cell.name.text = element.name
-                
-//                let dateFormatter = DateFormatter()
-//                dateFormatter.dateFormat = "dd MMMM yyyy"
-//                
-//                if let dateOfBirth = person.dateOfBirthday {
-//                    cell.cellDate.text = dateFormatter.string(from: dateOfBirth)
-//                } else {
-//                    cell.cellDate.text = "N/A"
-//                }
-            }
-        case .move:
-            if let indexPath = indexPath {
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-            }
-            if let indexPath = newIndexPath {
-                tableView.insertRows(at: [indexPath], with: .automatic)
-            }
-        case .delete:
-            if let indexPath = indexPath {
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-            }
-        default:
-            break
-        }
-    }
-    
-    // Информирует об окончании изменения данных
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-    }
 }

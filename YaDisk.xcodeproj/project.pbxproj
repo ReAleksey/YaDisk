@@ -22,6 +22,9 @@
 		5B6AA7682BA47127004AE90D /* ProfilePresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AA7672BA47127004AE90D /* ProfilePresenterProtocol.swift */; };
 		5B6AA76A2BA47136004AE90D /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AA7692BA47136004AE90D /* Presenter.swift */; };
 		5B6AA76C2BA9B5E8004AE90D /* Diagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AA76B2BA9B5E8004AE90D /* Diagram.swift */; };
+		5B7E1CDA2BD7DCCD007587B0 /* OldAllFilesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E1CD92BD7DCCD007587B0 /* OldAllFilesVC.swift */; };
+		5B7E1CDC2BD8FE05007587B0 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E1CDB2BD8FE05007587B0 /* AuthViewController.swift */; };
+		5B7E1CDE2BD9039D007587B0 /* OldDiskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E1CDD2BD9039D007587B0 /* OldDiskModel.swift */; };
 		5BA0BACD2BD2A78200E4D7A2 /* TestAPIVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0BACC2BD2A78200E4D7A2 /* TestAPIVC.swift */; };
 		5BA0BAF52BD2D54E00E4D7A2 /* FilesCell+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0BAF32BD2D54E00E4D7A2 /* FilesCell+CoreDataClass.swift */; };
 		5BA0BAF62BD2D54E00E4D7A2 /* FilesCell+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0BAF42BD2D54E00E4D7A2 /* FilesCell+CoreDataProperties.swift */; };
@@ -78,6 +81,9 @@
 		5B6AA7672BA47127004AE90D /* ProfilePresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenterProtocol.swift; sourceTree = "<group>"; };
 		5B6AA7692BA47136004AE90D /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		5B6AA76B2BA9B5E8004AE90D /* Diagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diagram.swift; sourceTree = "<group>"; };
+		5B7E1CD92BD7DCCD007587B0 /* OldAllFilesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldAllFilesVC.swift; sourceTree = "<group>"; };
+		5B7E1CDB2BD8FE05007587B0 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		5B7E1CDD2BD9039D007587B0 /* OldDiskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldDiskModel.swift; sourceTree = "<group>"; };
 		5BA0BACC2BD2A78200E4D7A2 /* TestAPIVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAPIVC.swift; sourceTree = "<group>"; };
 		5BA0BAF32BD2D54E00E4D7A2 /* FilesCell+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilesCell+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5BA0BAF42BD2D54E00E4D7A2 /* FilesCell+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilesCell+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -178,6 +184,7 @@
 				5B4B697F2B7F779D00FA4CE9 /* SceneDelegate.swift */,
 				5BF346F02B9F3D2800DC3F44 /* DiskModelProtocol.swift */,
 				5B4B69812B7F779D00FA4CE9 /* DiskModel.swift */,
+				5B7E1CDB2BD8FE05007587B0 /* AuthViewController.swift */,
 				5B6AA7672BA47127004AE90D /* ProfilePresenterProtocol.swift */,
 				5B6AA7692BA47136004AE90D /* Presenter.swift */,
 				5B6AA7612BA44D11004AE90D /* ProfileProtocol.swift */,
@@ -186,6 +193,7 @@
 				5BA0BACC2BD2A78200E4D7A2 /* TestAPIVC.swift */,
 				5BF346F62BA43FD500DC3F44 /* LastFilesViewController.swift */,
 				5BF346F82BA4400100DC3F44 /* AllFilesViewController.swift */,
+				5B7E1CDF2BD9043A007587B0 /* OLD */,
 				5BF346F22BA43F1100DC3F44 /* TabBarController.swift */,
 				5BF346EE2B9F313200DC3F44 /* JSONManager.swift */,
 				5B135B7F2BBD7F4000A33AE3 /* ElementCell.swift */,
@@ -213,6 +221,15 @@
 				5B4B69A02B7F77A000FA4CE9 /* YaDiskUITestsLaunchTests.swift */,
 			);
 			path = YaDiskUITests;
+			sourceTree = "<group>";
+		};
+		5B7E1CDF2BD9043A007587B0 /* OLD */ = {
+			isa = PBXGroup;
+			children = (
+				5B7E1CDD2BD9039D007587B0 /* OldDiskModel.swift */,
+				5B7E1CD92BD7DCCD007587B0 /* OldAllFilesVC.swift */,
+			);
+			path = OLD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -453,6 +470,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B7E1CDC2BD8FE05007587B0 /* AuthViewController.swift in Sources */,
 				5B4B69822B7F779D00FA4CE9 /* DiskModel.swift in Sources */,
 				5BF346F92BA4400100DC3F44 /* AllFilesViewController.swift in Sources */,
 				5BF346F32BA43F1100DC3F44 /* TabBarController.swift in Sources */,
@@ -461,6 +479,7 @@
 				5B6AA7682BA47127004AE90D /* ProfilePresenterProtocol.swift in Sources */,
 				5BF346EF2B9F313200DC3F44 /* JSONManager.swift in Sources */,
 				5B135B802BBD7F4000A33AE3 /* ElementCell.swift in Sources */,
+				5B7E1CDA2BD7DCCD007587B0 /* OldAllFilesVC.swift in Sources */,
 				5BF346F52BA43FA700DC3F44 /* ProfileViewController.swift in Sources */,
 				5B4B697E2B7F779D00FA4CE9 /* AppDelegate.swift in Sources */,
 				5BF346F72BA43FD500DC3F44 /* LastFilesViewController.swift in Sources */,
@@ -471,6 +490,7 @@
 				5B135B892BC01EED00A33AE3 /* Model.xcdatamodeld in Sources */,
 				5BA0BAF52BD2D54E00E4D7A2 /* FilesCell+CoreDataClass.swift in Sources */,
 				5BA0BAF62BD2D54E00E4D7A2 /* FilesCell+CoreDataProperties.swift in Sources */,
+				5B7E1CDE2BD9039D007587B0 /* OldDiskModel.swift in Sources */,
 				5BA0BAF82BD2D56A00E4D7A2 /* CoreDataManager.swift in Sources */,
 				5B6AA76A2BA47136004AE90D /* Presenter.swift in Sources */,
 			);
